@@ -82,7 +82,7 @@ fun BoxBudgetApp(viewModel: BudgetViewModel) {
 
     // The Boxes header is teal and runs under the status bar, so it needs light status icons.
     val view = LocalView.current
-    val darkStatusIcons = route != Route.Boxes
+    val darkStatusIcons = route != Route.Boxes || !state.tutorialSeen
     SideEffect {
         val window = (view.context as Activity).window
         WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkStatusIcons
@@ -93,6 +93,11 @@ fun BoxBudgetApp(viewModel: BudgetViewModel) {
             is Route.EditBox -> Route.BoxDetail(current.id)
             else -> Route.Boxes
         }
+    }
+
+    if (!state.tutorialSeen) {
+        TutorialScreen(onFinish = viewModel::finishTutorial)
+        return
     }
 
     Column(Modifier.fillMaxSize().background(Page)) {

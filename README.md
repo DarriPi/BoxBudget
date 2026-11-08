@@ -12,6 +12,7 @@ All data stays on your phone. The app has no account, needs no internet connecti
 - **Over-budget warning:** a box turns red and shows how much you overspent.
 - **Monthly reset:** reset by hand, or automatically on your payday. Each reset saves the month to History first.
 - **CSV export:** save your past months as a `.csv` file for Excel, Google Sheets or similar tools.
+- **Quick tutorial:** a short walkthrough shows new users how the app works. It appears only the first time the app opens.
 
 ## Install
 

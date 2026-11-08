@@ -242,9 +242,12 @@ private fun AddItemCard(boxName: String, onAdd: (String, Long) -> Unit) {
 }
 
 @Composable
-private fun ItemRow(item: Item, onClick: () -> Unit) {
+internal fun ItemRow(item: Item, onClick: (() -> Unit)?) {
     Row(
-        Modifier.fillMaxWidth().clickable(onClick = onClick).padding(horizontal = 18.dp, vertical = 13.dp),
+        Modifier
+            .fillMaxWidth()
+            .then(if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier)
+            .padding(horizontal = 18.dp, vertical = 13.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(Modifier.weight(1f)) {

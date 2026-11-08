@@ -219,7 +219,7 @@ private fun IconPicker(selected: String, onSelect: (String) -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun ShareCard(
+internal fun ShareCard(
     percent: Int,
     maxPercent: Int,
     otherBoxesPercent: Int,

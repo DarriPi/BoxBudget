@@ -55,6 +55,8 @@ class BudgetViewModel(application: Application) : AndroidViewModel(application) 
         state.copy(boxes = state.boxes.map { if (it.id == boxId) change(it) else it })
     }
 
+    fun finishTutorial() = mutate { it.copy(tutorialSeen = true) }
+
     fun setSalary(cents: Long) = mutate { it.copy(salaryCents = cents) }
 
     fun addBox(name: String, icon: String, percent: Int) = mutate {

@@ -178,6 +178,19 @@ class BudgetLogicTest {
     }
 
     @Test
+    fun newInstallStillNeedsTheTutorial() {
+        assertEquals(false, BudgetState().tutorialSeen)
+        assertEquals(false, decodeState(encodeState(BudgetState())).tutorialSeen)
+        assertEquals(true, decodeState(encodeState(BudgetState(tutorialSeen = true))).tutorialSeen)
+    }
+
+    @Test
+    fun budgetsSavedBeforeTheTutorialExistedSkipIt() {
+        val oldFile = org.json.JSONObject(encodeState(BudgetState())).apply { remove("tutorialSeen") }.toString()
+        assertEquals(true, decodeState(oldFile).tutorialSeen)
+    }
+
+    @Test
     fun ordinals() {
         assertEquals(listOf("1st", "2nd", "3rd", "4th", "11th", "12th", "13th", "21st", "22nd", "23rd", "25th", "31st"),
             listOf(1, 2, 3, 4, 11, 12, 13, 21, 22, 23, 25, 31).map(::ordinal))

@@ -63,6 +63,7 @@ fun encodeState(state: BudgetState): String = JSONObject()
     .put("autoReset", state.autoReset)
     .put("payday", state.payday)
     .put("nextResetEpochDay", state.nextResetEpochDay ?: JSONObject.NULL)
+    .put("tutorialSeen", state.tutorialSeen)
     .put(
         "boxes",
         state.boxes.toJsonArray { box ->
@@ -103,6 +104,8 @@ fun decodeState(text: String): BudgetState {
         autoReset = json.getBoolean("autoReset"),
         payday = json.getInt("payday"),
         nextResetEpochDay = if (json.isNull("nextResetEpochDay")) null else json.getLong("nextResetEpochDay"),
+        // Files saved before the tutorial existed belong to people already using the app.
+        tutorialSeen = json.optBoolean("tutorialSeen", true),
         boxes = json.getJSONArray("boxes").mapObjects { box ->
             Box(
                 id = box.getString("id"),

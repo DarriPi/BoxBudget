@@ -196,7 +196,7 @@ private fun ResetCard(
 }
 
 @Composable
-private fun MonthCard(month: MonthRecord) {
+internal fun MonthCard(month: MonthRecord) {
     val overBoxes = month.boxes.filter { it.isOver }.map { it.name }
     AppCard(Modifier.fillMaxWidth(), borderColor = if (month.isOver) Red else Hairline) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {

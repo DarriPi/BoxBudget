@@ -51,4 +51,5 @@ data class BudgetState(
     val autoReset: Boolean = true,
     val payday: Int = 25,
     val nextResetEpochDay: Long? = null,
+    val tutorialSeen: Boolean = false,
 )

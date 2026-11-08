@@ -243,7 +243,7 @@ private fun HeaderTile(label: String, value: String, suffix: String, modifier: M
 }
 
 @Composable
-private fun BoxCard(box: Box, budget: Long, onClick: () -> Unit, modifier: Modifier = Modifier) {
+internal fun BoxCard(box: Box, budget: Long, onClick: (() -> Unit)?, modifier: Modifier = Modifier) {
     val spent = box.spentCents
     val over = spent > budget
     AppCard(
