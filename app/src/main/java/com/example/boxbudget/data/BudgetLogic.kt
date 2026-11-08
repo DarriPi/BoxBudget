@@ -94,12 +94,6 @@ fun nextPayday(date: LocalDate, payday: Int): LocalDate {
     return if (candidate.isAfter(date)) candidate else month.plusMonths(1).payday(payday)
 }
 
-/** With payday resets the period is named after the month it ends in, as in "November" until the 25th. */
-fun BudgetState.currentMonthLabel(today: LocalDate): String {
-    val next = nextResetEpochDay?.takeIf { autoReset }?.let(LocalDate::ofEpochDay)
-    return monthLabel(next ?: today)
-}
-
 // ---- Month rollover -------------------------------------------------------
 
 private fun BudgetState.closeMonth(label: String, closedOn: LocalDate): BudgetState {
@@ -117,7 +111,7 @@ val BudgetState.hasSpending: Boolean get() = boxes.any { it.items.isNotEmpty() }
 
 /** Saves this month to history and empties every box. Does nothing if nothing was bought. */
 fun BudgetState.resetNow(today: LocalDate): BudgetState =
-    if (hasSpending) closeMonth(currentMonthLabel(today), today) else this
+    if (hasSpending) closeMonth(monthLabel(today), today) else this
 
 /**
  * Runs the payday reset if one is due. The app has no background job, so this runs whenever the

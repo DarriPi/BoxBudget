@@ -6,7 +6,6 @@ import com.example.boxbudget.data.Item
 import com.example.boxbudget.data.amountLeftCents
 import com.example.boxbudget.data.applyAutoReset
 import com.example.boxbudget.data.budgetCents
-import com.example.boxbudget.data.currentMonthLabel
 import com.example.boxbudget.data.decodeState
 import com.example.boxbudget.data.encodeState
 import com.example.boxbudget.data.formatRand
@@ -100,10 +99,10 @@ class BudgetLogicTest {
     }
 
     @Test
-    fun periodIsNamedAfterTheMonthItEndsIn() {
-        assertEquals("November 2026", designState.currentMonthLabel(nov8))
-        val after = designState.applyAutoReset(LocalDate.of(2026, 11, 26))
-        assertEquals("December 2026", after.currentMonthLabel(LocalDate.of(2026, 11, 26)))
+    fun manualResetAfterPaydayKeepsTheCurrentMonthName() {
+        val afterPayday = LocalDate.of(2026, 11, 26)
+        val state = designState.withResetSchedule(enabled = true, day = 25, today = afterPayday)
+        assertEquals("November 2026", state.resetNow(afterPayday).history.first().label)
     }
 
     @Test

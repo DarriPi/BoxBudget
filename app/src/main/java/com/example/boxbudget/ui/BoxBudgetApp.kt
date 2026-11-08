@@ -37,7 +37,7 @@ import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
 import com.example.boxbudget.data.boxedPercent
 import com.example.boxbudget.data.budgetOf
-import com.example.boxbudget.data.currentMonthLabel
+import com.example.boxbudget.data.monthLabel
 import com.example.boxbudget.ui.theme.Card
 import com.example.boxbudget.ui.theme.Hairline
 import com.example.boxbudget.ui.theme.Muted
@@ -78,7 +78,7 @@ fun BoxBudgetApp(viewModel: BudgetViewModel) {
     val state by viewModel.state.collectAsState()
     val today by viewModel.today.collectAsState()
     var route by rememberSaveable(stateSaver = RouteSaver) { mutableStateOf<Route>(Route.Boxes) }
-    val monthLabel = state.currentMonthLabel(today)
+    val currentMonth = monthLabel(today)
 
     // The Boxes header is teal and runs under the status bar, so it needs light status icons.
     val view = LocalView.current
@@ -105,7 +105,7 @@ fun BoxBudgetApp(viewModel: BudgetViewModel) {
         when (val current = route) {
             Route.Boxes -> BoxesScreen(
                 state = state,
-                monthLabel = monthLabel,
+                monthLabel = currentMonth,
                 onSetSalary = viewModel::setSalary,
                 onOpenBox = { route = Route.BoxDetail(it) },
                 onAddBox = { route = Route.NewBox },
@@ -115,7 +115,7 @@ fun BoxBudgetApp(viewModel: BudgetViewModel) {
             Route.History -> HistoryScreen(
                 state = state,
                 today = today,
-                monthLabel = monthLabel,
+                monthLabel = currentMonth,
                 onAutoResetChange = viewModel::setAutoReset,
                 onPaydayChange = viewModel::setPayday,
                 onResetNow = viewModel::resetNow,

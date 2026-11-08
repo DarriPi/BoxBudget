@@ -71,7 +71,7 @@ A reset saves the month to **Past months** and empties every box. Your boxes and
 
 The automatic reset runs when you open the app on or after payday, so it can't happen while the app stays closed. If you miss several paydays, your spending is saved as one month.
 
-With automatic reset on, a period is named after the month it ends in. With a payday on the 25th, 25 October to 24 November is "November".
+The header always shows the current calendar month. A saved month in History is named after the month it was reset in, so a reset on 25 November is saved as "November".
 
 ### Export to CSV
 
